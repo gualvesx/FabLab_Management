@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Activity, ChevronDown, ChevronUp, Download, FileText, Printer, RefreshCw, Calendar, CheckCircle, Clock, XCircle, BarChart2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -39,9 +39,6 @@ function periodLabel(type: string, start: string, end: string) {
   return `Mês ${formatDateBR(start)} → ${formatDateBR(end)}`;
 }
 
-function typeToTab(type: string): TabType {
-  return type === 'daily' ? 'diario' : type === 'weekly' ? 'semanal' : 'mensal';
-}
 
 function tabToType(tab: TabType): 'daily' | 'weekly' | 'monthly' {
   return tab === 'diario' ? 'daily' : tab === 'semanal' ? 'weekly' : 'monthly';
@@ -245,7 +242,6 @@ export function FabReports() {
   // ── Print Report ─────────────────────────────────────────────
   const handlePrint = async (report: Report) => {
     setPrintingId(report.id);
-    const type = report.type;
     const start = report.period_start;
     const end   = report.period_end;
 
